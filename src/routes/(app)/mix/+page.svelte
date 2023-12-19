@@ -855,8 +855,8 @@
                 text="Weiter"
                 on:click={() =>
                     data.mix.personalProfile.gender === "female"
-                        ? (step = 30)
-                        : (step += 1)}
+                        ? (step += 1)
+                        : (step = 30)}
                 delay={500}
             />
         </Step>
@@ -888,7 +888,7 @@
                     delay={500}
                 />
             {/if}
-            <Button text="Weiter" on:click={() => (step += 1)} delay={600} />
+            <Button text="Weiter" on:click={() => {data.mix.personalProfile.gender === "female" ? step += 1 : step += 4}} delay={600} />
         </Step>
     {:else if step === 28}
         <Step
@@ -936,18 +936,40 @@
                     title="Nein"
                     icon="no"
                     delay={400}
-                    on:click={() => (step += 2)}
+                    on:click={() => (step += 1)}
                 />
             </div>
         </Step>
     {:else if step === 30}
+        <Step
+            title="Verhütung"
+            description="Nimmst du hormonelle Verhütungsmittel?"
+            step={7}
+            current={1}
+        >
+            <div class="three-item-wrapper">
+                <Item
+                    title="Ja"
+                    icon="yes"
+                    delay={300}
+                    on:click={() => (step += 1)}
+                />
+                <Item
+                    title="Nein"
+                    icon="no"
+                    delay={400}
+                    on:click={() => (step += 2)}
+                />
+            </div>
+        </Step>
+    {:else if step === 31}
         <Step
             title="Deine Ergebnisse"
             description="Hier siehst du wo du einen Mangel an Nährstoffen hast, auf Basis deiner Angaben"
             step={7}
             current={2}
         ></Step>
-    {:else if step === 31}
+    {:else if step === 32}
         <Step
             title="Bluttest"
             description="Wenn du einen Bluttest hochladen möchtest, lade diesen hier hoch. Unsere Experten analysieren deinen Test und passen deinenen Mix bei Bedarf an."
@@ -957,7 +979,7 @@
             <Upload delay={300} />
             <Button text="Weiter" on:click={() => (step += 1)} delay={400} />
         </Step>
-    {:else if step === 32}
+    {:else if step === 33}
         <Step
             title="Produkt kaufen"
             description="Wähle eine der folgenden Abos aus um deinen Nutrition Mix zu bestellen."
@@ -966,7 +988,7 @@
         >
             <Month />
         </Step>
-    {:else if step === 33}
+    {:else if step === 34}
         <Step
             title="Account erstellen"
             description="Erstelle einen Account um das Produkt zu kaufen. Nur mit einem Account kannst du dein Abo verwalten"
@@ -1031,7 +1053,7 @@
                 >
             </form>
         </Step>
-    {:else if step === 34}
+    {:else if step === 35}
         <Step
             title="Bezahl Methode"
             description="Wähle eine Zahlmethode"
@@ -1079,7 +1101,7 @@
                 style="width: 360px"
             />
         </Step>
-    {:else if step === 35}
+    {:else if step === 36}
         <Step
             title="Du bist fertig"
             description="Vielen Dank für deine Bestellung! Du bekommst deine Bestellbestätigung per Mail zugesendet, deine Rechnung kannst du im Profil sehen. Wir benachrichten dich sobald dein Mix bereit ist und an dich versendet wird!"
@@ -1113,7 +1135,7 @@
         icon="lifestyle"
         on:click={() => (showMenu = true)}
     />
-{:else if step > 27 && step < 30}
+{:else if step > 27 && step < 31}
     <Indikator
         title="Lebensphase"
         icon="pregnant"
