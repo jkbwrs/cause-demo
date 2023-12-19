@@ -24,7 +24,7 @@
         width: 100%;
         margin: 20px auto 60px auto;
         width: 400px;
-        max-width: 90vw;
+        max-width: 80vw;
     }
 
     .slider-labels {

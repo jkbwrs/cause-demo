@@ -57,10 +57,6 @@
         font-size: 16px;
     }
 
-    .icon {
-
-    }
-
     .arrow {
         margin-left: auto;
     }
@@ -93,6 +89,12 @@
         transform: translate(-50%, -50%);
         color: var(--white);
         font-size: 16px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .title {
+            font-size: 14px;
+        }
     }
 
 </style>

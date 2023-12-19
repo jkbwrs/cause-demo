@@ -1,6 +1,8 @@
 
 
 import type { PageLoad } from './$types';
+import type { Actions } from './$types';
+
 
 export const load: PageLoad = () => {
 
@@ -49,3 +51,25 @@ export const load: PageLoad = () => {
         }
 	}
 };
+
+
+
+export const actions = {
+
+	signup: async ({request}) => {
+        const data = await request.formData();
+        const firstname = data.get('firstname');
+        const lastname = data.get('lastname');
+        const mail = data.get('mail');
+        const mailConfirmed = data.get('mailConfirmed');
+        const password = data.get('password');
+        const passwordConfirmed = data.get('passwordConfirmed');
+
+        console.log("Signup runs")
+
+        return {
+        }
+	},
+
+
+} satisfies Actions;
