@@ -1,0 +1,146 @@
+
+
+:root {
+    --yellow: #D5FD72;
+    --accent: #899C9C;
+    --black: #1f2525;
+    --white: #fff;
+    --grey: #D9D9D9;
+    --lightgrey: #F1F1F1;
+    --transparent: rgba(255,255,255, 0.8)
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+    :root {
+        --yellow: #899C9C;
+        --accent: #D5FD72;
+        --black: #fff;
+        --white: #1f2525;
+        --grey: #252525;
+        --lightgrey: #0b0b0b;
+        --transparent: rgba(37,37,37, 0.8)
+    }
+  }
+*/
+
+
+* {
+    box-sizing: border-box;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 130%;
+    font-family: 'Inter', Helvetica, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*::selection {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+img::selection {
+    background-color: transparent;
+}
+
+body, html {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Ardela", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+h1 {font-size: 42px}
+h2 {font-size: 32px}
+h3 {font-size: 28px}
+h4 {font-size: 22px}
+h5 {font-size: 20px}
+h6 {font-size: 18px}
+
+a {
+    text-decoration: none;
+    color: var(--black);
+    cursor: pointer;
+    color: var(--black);
+}
+
+p {
+    color: var(--black);
+}
+
+.form {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-direction: column;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+    padding: 12px;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: var(--accent);
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    padding: 10px 28px;
+    background-color: var(--black);
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 979px) {
+    * {
+        font-size: 14px;
+    }
+
+    h1 {font-size: 36px}
+    h2 {font-size: 30px}
+    h3 {font-size: 26px}
+    h4 {font-size: 22px}
+    h5 {font-size: 18px}
+    h6 {font-size: 16px}
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+    h1 {font-size: 26px}
+    h2 {font-size: 22px}
+    h3 {font-size: 20px}
+    h4 {font-size: 18px}
+    h5 {font-size: 16px}
+    h6 {font-size: 14px}
+    
+}
