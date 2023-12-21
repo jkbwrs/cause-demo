@@ -10,7 +10,7 @@
     let innerWidth: number
 
     function closeDD() {
-        innerWidth < 600 ? profil = false : null
+        innerWidth < 600 ? profil = false : true
     }
 
     function logout() {
@@ -156,6 +156,12 @@
     }
 
     @media screen and (max-width: 600px) {
+
+        main {
+            min-height: 100vh;
+            padding: 80px 5vw 80px 5vw;
+        }
+
         nav {
             height: 55px;
             backdrop-filter: blur(12px);
