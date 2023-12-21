@@ -1,7 +1,6 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
 
-
     export let title: string = ""
     export let icon: string = ""
     export let delay: number = 0

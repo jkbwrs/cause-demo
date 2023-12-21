@@ -46,6 +46,8 @@ export const actions = {
         const firstname = data.get('firstname');
         const lastname = data.get('lastname');
 
+        
+
 		console.log(firstname, lastname, "changeName runs")
 	},
 
