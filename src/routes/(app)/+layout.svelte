@@ -9,6 +9,10 @@
     let triggerElement: HTMLElement
     let innerWidth: number
 
+    function closeDD() {
+        innerWidth < 600 ? profil = false : null
+    }
+
     function logout() {
         // Logout Logik
         goto('/login')
@@ -56,15 +60,15 @@
     {#if profil}
             <div class="profil-dd" use:clickOutside transition:fly={{y: 20, duration: 400}}>
                 <div class="profil">
-                    <a class="link" href="/" on:click={() => profil = false}>
+                    <a class="link" href="/" on:click={closeDD}>
                         <img src="../dashboard.svg" alt="" width="20" height="20">
                         Dashboard
                     </a>
-                    <a class="link" href="/profil" on:click={() => profil = false}>
+                    <a class="link" href="/profil" on:click={closeDD}>
                         <img src="../profil.svg" alt="" width="20" height="20">
                         Profil
                     </a>
-                    <a class="link" href="https://cause-health.webflow.io" target="_blank" on:click={() => profil = false}>
+                    <a class="link" href="https://cause-health.webflow.io" target="_blank" on:click={closeDD}>
                         <img src="../link.svg" alt="" width="20" height="20">
                         Website
                     </a>
