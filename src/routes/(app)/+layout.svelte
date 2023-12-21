@@ -1,12 +1,13 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import {onDestroy} from 'svelte'
+    import {onDestroy, onMount} from 'svelte'
     import { fly } from "svelte/transition";
     import {user} from "$lib/states"
     import Button from "$lib/components/button.svelte";
 
     let profil: boolean = false
     let triggerElement: HTMLElement
+    let innerWidth: number
 
     function logout() {
         // Logout Logik
@@ -29,8 +30,12 @@
             }
         };
     }
+
+    $: if (innerWidth < 600) profil = true
+
 </script>
 
+<svelte:window bind:innerWidth />
 
 {#if $user != null}
     <nav>
@@ -41,11 +46,14 @@
             </svg>            
         </a>
 
-        <div class="profil-trigger" bind:this={triggerElement} on:click={() => profil = !profil} on:keypress={() => profil = !profil} role="button" tabindex="0">
-            <img src="../profil.svg" width="22" height="22" alt="Profil">
-        </div>
+        {#if innerWidth > 600}
+            <div class="profil-trigger" bind:this={triggerElement} on:click={() => profil = !profil} on:keypress={() => profil = !profil} role="button" tabindex="0">
+                <img src="../profil.svg" width="22" height="22" alt="Profil">
+            </div>
+        {/if}
+    </nav>
 
-        {#if profil}
+    {#if profil}
             <div class="profil-dd" use:clickOutside transition:fly={{y: 20, duration: 400}}>
                 <div class="profil">
                     <a class="link" href="/" on:click={() => profil = false}>
@@ -67,7 +75,6 @@
                 </div>
             </div>
         {/if}
-    </nav>
     <main>
         <slot></slot>
     </main>
@@ -154,6 +161,29 @@
 
         .profil-dd {
             background-color: var(--white);
+            position: fixed;
+            inset: auto 0 0 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: row;
+            border: none;
+            border: none;
         }
+
+        .profil {
+            width: 100%;
+            display: flex;
+            flex-direction: row !important;
+        }
+
+        .link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            text-align: center;
+        }
+        
     }
 </style>
