@@ -11,7 +11,7 @@
 
     let empty: boolean = false;
     let showModal: boolean = false;
-    let bloodTest: boolean = true;
+    let bloodTest: boolean = false;
 
     interface MineralData {
         [key: string]: number;

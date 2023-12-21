@@ -9,6 +9,7 @@ export const load: PageLoad = () => {
     // Api Call Data
     console.log("Page Load runs")
 
+    
 
 	return {
 		mix: {
@@ -17,7 +18,7 @@ export const load: PageLoad = () => {
                 height: 150,
                 weight: 40,
                 age: 0,
-                bodyFatPercentage: "10 - 15",
+                bodyFatPercentage: "20 - 22",
                 goal: "lose weight",
             },
             dietaryProfile: {
@@ -47,6 +48,7 @@ export const load: PageLoad = () => {
             lifePhaseProfile: {
                 pregnant: false,
                 breastfeeding: false,
+                contraception: false
             },
         }
 	}
