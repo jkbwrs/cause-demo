@@ -68,9 +68,9 @@
             {/if}
         </div>
         {#if !bloodTest}
-            <Warning />
+            <Warning delay={300} />
         {/if}
-        <TreeChart delay={300} />
+        <TreeChart delay={400} />
         <div class="charts">
             <RadialChart data={transformedMineralData} title="Mineralien & Spurenelemente" delay={500} />
             <RadialChart data={transformedSonstigeData} title="Sonstiges" delay={700} />
