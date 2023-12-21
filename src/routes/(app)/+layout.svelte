@@ -10,7 +10,7 @@
     let innerWidth: number
 
     function closeDD() {
-        innerWidth < 600 ? profil = false : true
+        innerWidth < 600 ? profil = true : profil = false
     }
 
     function logout() {
