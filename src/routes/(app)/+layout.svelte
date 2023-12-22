@@ -177,12 +177,12 @@
             border: none;
             border: none;
             width: 90%;
-            margin: 0 auto 12px auto;
+            margin: 0 auto 20px auto;
             background-color: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--accent);
-            border-radius: 40px;
+            border-radius: 20px;
             padding: 2px;
             overflow: hidden;
         }
