@@ -65,7 +65,7 @@
                         Dashboard
                     </a>
                     <a class="link" href="/profil" on:click={closeDD}>
-                        <img src="../profil.svg" alt="" width="20" height="20">
+                        <img src="../profil-outline.svg" alt="" width="20" height="20">
                         Profil
                     </a>
                     <a class="link" href="https://cause-health.webflow.io" target="_blank" on:click={closeDD}>
@@ -160,7 +160,7 @@
 
         main {
             min-height: 100vh;
-            padding: 20px 5vw 60px 5vw;
+            padding: 20px 5vw 50px 5vw;
         }
 
         nav {
@@ -182,7 +182,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--accent);
-            border-radius: 20px;
+            border-radius: 26px;
             padding: 2px;
             overflow: hidden;
         }
