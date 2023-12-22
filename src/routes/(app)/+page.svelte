@@ -6,6 +6,7 @@
     import Warning from '$lib/components/warning.svelte';
     import { fly, scale } from 'svelte/transition';
     import type { PageData } from './$types';
+    import {user} from "$lib/states"
 
     export let data: PageData;
 
@@ -50,42 +51,45 @@
 </svelte:head>
 
 
-{#if empty}
-    <div class="empty">
-        <div class="empty-content">
-            <h1 in:fly|global={{y: 20, duration: 400, delay: 200}}>Cause <br/> we're Unique</h1>
-            <p style="margin-bottom: 20px" in:fly|global={{y: 20, duration: 400, delay: 400}}>Du hast noch keinen Nutrition Mix erstellt, <br> erstelle diesen jetzt</p>
-            <Button link="/mix" text="Start now" delay={600} />
+{#if $user != null}
+
+    {#if empty}
+        <div class="empty">
+            <div class="empty-content">
+                <h1 in:fly|global={{y: 20, duration: 400, delay: 200}}>Cause <br/> we're Unique</h1>
+                <p style="margin-bottom: 20px" in:fly|global={{y: 20, duration: 400, delay: 400}}>Du hast noch keinen Nutrition Mix erstellt, <br> erstelle diesen jetzt</p>
+                <Button link="/mix" text="Start now" delay={600} />
+            </div>
+            <img src="../fingerprint.svg" alt="Fingerprint" class="fingerprint" in:scale|global={{start: 0.9, duration: 800}}>
         </div>
-        <img src="../fingerprint.svg" alt="Fingerprint" class="fingerprint" in:scale|global={{start: 0.9, duration: 800}}>
-    </div>
-{:else}
-    <div class="dashboard">
-        <div class="header">
-            <h1 in:fly|global={{y: 20, duration: 400, delay: 200}}>Dein Mix</h1>
-            {#if bloodTest}
-                <Button text="Bluttest Ergebnisse" style="background-color: var(--accent)" yellow={false} on:click={() => showModal = true} />
+    {:else}
+        <div class="dashboard">
+            <div class="header">
+                <h1 in:fly|global={{y: 20, duration: 400, delay: 200}}>Dein Mix</h1>
+                {#if bloodTest}
+                    <Button text="Bluttest Ergebnisse" style="background-color: var(--accent)" yellow={false} on:click={() => showModal = true} />
+                {/if}
+            </div>
+            {#if !bloodTest}
+                <Warning delay={300} />
             {/if}
+            <TreeChart delay={400} />
+            <div class="charts">
+                <RadialChart data={transformedMineralData} title="Mineralien & Spurenelemente" delay={500} />
+                <RadialChart data={transformedSonstigeData} title="Sonstiges" delay={700} />
+            </div>
         </div>
-        {#if !bloodTest}
-            <Warning delay={300} />
-        {/if}
-        <TreeChart delay={400} />
-        <div class="charts">
-            <RadialChart data={transformedMineralData} title="Mineralien & Spurenelemente" delay={500} />
-            <RadialChart data={transformedSonstigeData} title="Sonstiges" delay={700} />
-        </div>
-    </div>
+    {/if}
+
+
+    {#if !empty && showModal}
+        <Modal title="Bluttest Ergebnisse" on:click={() => showModal = false}>
+            <p class="description">Deine Bluttest Ergebnisse sind noch nicht verfügbar, <br> wir benachrichtigen dich sobald diese verfügbar sind.</p>
+
+        </Modal>
+    {/if}
+
 {/if}
-
-
-{#if !empty && showModal}
-    <Modal title="Bluttest Ergebnisse" on:click={() => showModal = false}>
-        <p class="description">Deine Bluttest Ergebnisse sind noch nicht verfügbar, <br> wir benachrichtigen dich sobald diese verfügbar sind.</p>
-
-    </Modal>
-{/if}
-
 
 
 

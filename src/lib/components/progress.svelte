@@ -22,7 +22,7 @@
         border-radius: 12px;
         margin: 0 auto;
         position: fixed;
-        inset: auto 0 80px 0;
+        inset: auto 0 40px 0;
     }
 
     .progress-bar {
@@ -30,6 +30,14 @@
         width: var(--width);
         background-color: var(--accent);
         transition: all 400ms ease;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .progress {
+            inset: auto 0 90px 0;
+        }
+
     }
 
 

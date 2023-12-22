@@ -37,6 +37,7 @@
 
     $: if (innerWidth < 600) profil = true
 
+
 </script>
 
 <svelte:window bind:innerWidth />

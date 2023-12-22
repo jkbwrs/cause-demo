@@ -12,6 +12,7 @@
     import type { PageData } from "./$types";
     import { fly } from "svelte/transition";
     import { goto } from "$app/navigation";
+    import {user} from "$lib/states"
 
     export let data: PageData;
 
@@ -54,17 +55,15 @@
         }
 
         if (data.mix.personalProfile.gender === "female") {
-            if (step === 9) step = 10
-            if (step === 10) step = 11
-            if (step === 11) step = 12
-            if (step === 12) step = 13
+
         }
 
         if (data.mix.personalProfile.gender === "male") {
-            if (step === 9) step = 10
-            if (step === 10) step = 11
-            if (step === 11) step = 12
-            if (step === 12) step = 13
+
+        }
+
+        if ($user != null) {
+            if (step === 34) step = 35
         }
     }
 </script>
