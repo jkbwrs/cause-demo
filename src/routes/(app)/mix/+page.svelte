@@ -950,10 +950,7 @@
 
             <Button
                 text="Weiter"
-                on:click={() =>
-                    data.mix.personalProfile.gender === "female"
-                        ? (step += 1)
-                        : (step = 30)}
+                on:click={() => step += 1}
                 delay={500}
             />
         </Step>
@@ -1055,7 +1052,7 @@
                     title="Nein"
                     icon="no"
                     delay={400}
-                    on:click={() => (step += 2)}
+                    on:click={() => (step += 1)}
                 />
             </div>
         </Step>
