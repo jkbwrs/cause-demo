@@ -59,7 +59,7 @@
         }
 
         if (data.mix.personalProfile.gender === "male") {
-
+            if (step === 28) step = 31
         }
 
         if ($user != null) {
@@ -159,7 +159,7 @@
             <Range
                 bind:value={data.mix.personalProfile.weight}
                 min={40}
-                max={220}
+                max={150}
                 delay={400}
                 suffix="kg"
             />
@@ -170,70 +170,134 @@
             title="KörperfettAnteil"
             description="Wie hoch ist dein Körperfettanteil?"
             step={6}
-            current={3}
-        >
-            <div class="three-item-wrapper">
-                <Item
-                    title="Unter 10%"
-                    current={data.mix.personalProfile.bodyFatPercentage}
-                    icon="profil"
-                    delay={300}
-                    value="0-10"
-                    on:click={() => {
-                        (step += 1),
-                            (data.mix.personalProfile.bodyFatPercentage =
-                                "0-10");
-                    }}
-                />
-                <Item
-                    title="10% - 15%"
-                    current={data.mix.personalProfile.bodyFatPercentage}
-                    icon="profil"
-                    delay={400}
-                    value="10-15"
-                    on:click={() => {
-                        (step += 1),
-                            (data.mix.personalProfile.bodyFatPercentage =
-                                "10-15");
-                    }}
-                />
-                <Item
-                    title="15% - 20%"
-                    current={data.mix.personalProfile.bodyFatPercentage}
-                    icon="profil"
-                    delay={500}
-                    value="15-20"
-                    on:click={() => {
-                        (step += 1),
-                            (data.mix.personalProfile.bodyFatPercentage =
-                                "15-20");
-                    }}
-                />
-                <Item
-                    title="20% - 30%"
-                    current={data.mix.personalProfile.bodyFatPercentage}
-                    icon="profil"
-                    delay={600}
-                    value="20-30"
-                    on:click={() => {
-                        (step += 1),
-                            (data.mix.personalProfile.bodyFatPercentage =
-                                "20-30");
-                    }}
-                />
-                <Item
-                    title="Über 30%"
-                    current={data.mix.personalProfile.bodyFatPercentage}
-                    icon="profil"
-                    delay={600}
-                    value="30-40"
-                    on:click={() => {
-                        (step += 1),
-                            (data.mix.personalProfile.bodyFatPercentage =
-                                "30-40");
-                    }}
-                />
-            </div>
+            current={3}>
+                {#if data.mix.personalProfile.gender === "female" || data.mix.personalProfile.gender === "moreFemale" }
+                    <div class="three-item-wrapper">
+                        <Item
+                            title="Unter 20%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={300}
+                            value="0-10"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "0-10");
+                            }}
+                        />
+                        <Item
+                            title="21% - 26%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={400}
+                            value="10-15"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "10-15");
+                            }}
+                        />
+                        <Item
+                            title="27% - 32%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={500}
+                            value="15-20"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "15-20");
+                            }}
+                        />
+                        <Item
+                            title="33% - 40%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={600}
+                            value="20-30"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "20-30");
+                            }}
+                        />
+                        <Item
+                            title="Über 40%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={600}
+                            value="30-40"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "30-40");
+                            }}
+                        />
+                    </div>
+                {:else}
+                    <div class="three-item-wrapper">
+                        <Item
+                            title="Unter 12%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={300}
+                            value="0-10"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "0-10");
+                            }}
+                        />
+                        <Item
+                            title="13% - 18%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={400}
+                            value="10-15"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "10-15");
+                            }}
+                        />
+                        <Item
+                            title="19% - 25%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={500}
+                            value="15-20"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "15-20");
+                            }}
+                        />
+                        <Item
+                            title="26% - 30%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={600}
+                            value="20-30"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "20-30");
+                            }}
+                        />
+                        <Item
+                            title="Über 30%"
+                            current={data.mix.personalProfile.bodyFatPercentage}
+                            icon="profil"
+                            delay={600}
+                            value="30-40"
+                            on:click={() => {
+                                (step += 1),
+                                    (data.mix.personalProfile.bodyFatPercentage =
+                                        "30-40");
+                            }}
+                        />
+                    </div>
+                {/if}
         </Step>
     {:else if step === 5}
         <Step
@@ -436,8 +500,8 @@
             current={2}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.dietaryProfile.meatPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -451,8 +515,8 @@
             current={3}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.dietaryProfile.fishPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -466,8 +530,8 @@
             current={4}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={15}
+                start={0}
                 bind:times={data.mix.dietaryProfile.eggsPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -481,8 +545,8 @@
             current={5}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.dietaryProfile.milkPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -496,8 +560,8 @@
             current={6}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.dietaryProfile.vegetableServingsPerDay}
                 next={() => (step += 1)}
                 delay={50}
@@ -511,8 +575,8 @@
             current={7}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.dietaryProfile.fruitServingsPerDay}
                 next={() => (step += 1)}
                 delay={50}
@@ -521,27 +585,27 @@
     {:else if step === 15}
         <Step
             title="Lebensmittelqualität"
-            description="Wie verarbeitet sind die Produkte die du konsumierst?"
+            description="Wie oft isst du stark verarbeitete Lebensmittel?"
             step={11}
             current={8}
         >
             <div class="three-item-wrapper">
                 <Item
-                    title="Wenig verarbeitete Lebensmittel"
+                    title="Nie"
                     current={data.mix.dietaryProfile.foodQualität}
                     icon="star"
                     delay={300}
                     on:click={() => (step += 1)}
                 />
                 <Item
-                    title="Manchmal verarbeitete Lebensmittel"
+                    title="Manchmal"
                     current={data.mix.dietaryProfile.foodQualität}
                     icon="half-star"
                     delay={400}
                     on:click={() => (step += 1)}
                 />
                 <Item
-                    title="Oft verarbeitete Lebensmittel"
+                    title="Meistens"
                     current={data.mix.dietaryProfile.foodQualität}
                     icon="empty-star"
                     delay={500}
@@ -572,8 +636,8 @@
             current={10}
         >
             <MultiNumbers
-                length={7}
-                start={1}
+                length={8}
+                start={0}
                 bind:times={data.mix.personalProfile.age}
                 next={() => (step += 1)}
                 delay={50}
@@ -591,19 +655,19 @@
                     title="Cause SWEET"
                     icon="sweet"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "sweet"}
                 />
                 <Item
                     title="Cause SLEEP"
                     icon="sleep-cause"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "sleep"}
                 />
                 <Item
                     title="Beide"
                     icon="both"
                     delay={500}
-                    on:click={() => (step += 1)}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "both"}
                 />
             </div>
             <div class="input-item" in:fly|global={{ y: 20, delay: 600 }}>
@@ -614,8 +678,8 @@
                     placeholder="Produkt eintragen"
                     style="text-align: center"
                 />
-                <Button text="Weiter" on:click={() => (step += 1)} delay={0} />
             </div>
+            <Button text="Weiter" on:click={() => (step += 1)} delay={700} style="margin-top: 20px" />
         </Step>
     {:else if step === 19}
         <Step title="Kapitel 3" progress={false}>
@@ -684,7 +748,7 @@
                     on:click={() => (step += 1)}
                 />
                 <Item
-                    title="Mehr als 9 Stunden"
+                    title="Mehr als 10 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
                     icon="sleep"
                     delay={700}
@@ -821,14 +885,20 @@
             title="Sport"
             description="Wie viel Sport machst du in der Woche?"
             step={6}
-            current={5}
-        >
-            <MultiNumbers
-                length={24}
-                start={0}
-                bind:times={data.mix.lifestyleProfile.hoursOfExercisePerWeek}
-                next={() => (step += 1)}
-                delay={20}
+            current={5}>
+
+            <Range
+                bind:value={data.mix.lifestyleProfile.hoursOfExercisePerWeek}
+                min={0}
+                max={420}
+                delay={400}
+                suffix=" min"
+            />
+
+            <Button
+                text="Weiter"
+                on:click={() => step += 1}
+                delay={500}
             />
         </Step>
     {:else if step === 26}
@@ -915,7 +985,7 @@
                     delay={500}
                 />
             {/if}
-            <Button text="Weiter" on:click={() => {data.mix.personalProfile.gender === "female" ? step += 1 : step += 4}} delay={600} />
+            <Button text="Weiter" on:click={() => step += 1} delay={600} />
         </Step>
     {:else if step === 28}
         <Step

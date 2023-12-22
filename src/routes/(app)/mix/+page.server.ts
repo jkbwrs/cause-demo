@@ -33,6 +33,7 @@ export const load: PageLoad = () => {
                 cupsOfWaterPerDay: 0,
                 milkPerWeek: 0,
                 foodQualität: "low",
+                nutrion: ""
             },
             lifestyleProfile: {
                 hoursOfSleepPerNight: 0,
@@ -48,7 +49,8 @@ export const load: PageLoad = () => {
             lifePhaseProfile: {
                 pregnant: false,
                 breastfeeding: false,
-                contraception: false
+                contraception: false,
+                menopause: false,
             },
         }
 	}
