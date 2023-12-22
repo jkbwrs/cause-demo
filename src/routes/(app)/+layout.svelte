@@ -124,7 +124,7 @@
     }
 
     .profil-dd {
-        position: absolute;
+        position: fixed;
         inset: 60px 5vw auto auto;
         z-index: 100;
         padding: 12px;
@@ -170,7 +170,6 @@
 
         .profil-dd {
             background-color: var(--white);
-            position: fixed;
             inset: auto 0 0 0;
             z-index: 1000;
             display: flex;

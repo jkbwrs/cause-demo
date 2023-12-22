@@ -39,14 +39,14 @@ export const load: PageLoad = () => {
 
 
 
-export const actions = {
+export const actions: Actions = {
 
 	changeName: async ({request}) => {
         const data = await request.formData();
         const firstname = data.get('firstname');
         const lastname = data.get('lastname');
 
-        
+
 
 		console.log(firstname, lastname, "changeName runs")
 	},
@@ -76,4 +76,4 @@ export const actions = {
     }
 
 
-} satisfies Actions;
+}
