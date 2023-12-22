@@ -39,6 +39,34 @@
         // Signup Funktion
         step += 1;
     }
+
+    $: {
+        if (data.mix.dietaryProfile.dietType === "vegetarisch") {
+            if (step === 9) step = 10
+            if (step === 10) step = 11
+        }
+
+        if (data.mix.dietaryProfile.dietType === "vegan") {
+            if (step === 9) step = 10
+            if (step === 10) step = 11
+            if (step === 11) step = 12
+            if (step === 12) step = 13
+        }
+
+        if (data.mix.personalProfile.gender === "female") {
+            if (step === 9) step = 10
+            if (step === 10) step = 11
+            if (step === 11) step = 12
+            if (step === 12) step = 13
+        }
+
+        if (data.mix.personalProfile.gender === "male") {
+            if (step === 9) step = 10
+            if (step === 10) step = 11
+            if (step === 11) step = 12
+            if (step === 12) step = 13
+        }
+    }
 </script>
 
 <svelte:head>
@@ -967,8 +995,13 @@
             title="Deine Ergebnisse"
             description="Hier siehst du wo du einen Mangel an Nährstoffen hast, auf Basis deiner Angaben"
             step={7}
-            current={2}
-        ></Step>
+            current={2}>
+                <Button
+                    text="Weiter"
+                    on:click={() => step += 1}
+                    delay={300}
+                />
+        </Step>
     {:else if step === 32}
         <Step
             title="Bluttest"
@@ -984,9 +1017,13 @@
             title="Produkt kaufen"
             description="Wähle eine der folgenden Abos aus um deinen Nutrition Mix zu bestellen."
             step={7}
-            current={4}
-        >
-            <Month />
+            current={4}>
+                <Month />
+                <Button
+                    text="Weiter"
+                    on:click={() => step += 1}
+                    delay={300}
+                />
         </Step>
     {:else if step === 34}
         <Step

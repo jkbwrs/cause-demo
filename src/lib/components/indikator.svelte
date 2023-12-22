@@ -15,8 +15,8 @@
 <style>
 
     .indikator {
-        position: absolute;
-        inset: 15px 0 auto 0;
+        position: fixed;
+        inset: 20px 0 auto 0;
         z-index: 100;
         margin: 0 auto;
         height: 52px;

@@ -125,6 +125,7 @@
     .profil-dd {
         position: absolute;
         inset: 60px 5vw auto auto;
+        z-index: 100;
         padding: 12px;
         border: 1px solid var(--accent);
         border-radius: 6px;
@@ -159,14 +160,11 @@
 
         main {
             min-height: 100vh;
-            padding: 80px 5vw 80px 5vw;
+            padding: 20px 5vw 60px 5vw;
         }
 
         nav {
-            height: 55px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            background-color: rgba(255, 255, 255, 0.8);
+            display: none;
         }
 
         .profil-dd {
@@ -178,6 +176,15 @@
             flex-direction: row;
             border: none;
             border: none;
+            width: 90%;
+            margin: 0 auto 12px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--accent);
+            border-radius: 40px;
+            padding: 2px;
+            overflow: hidden;
         }
 
         .profil {
@@ -193,6 +200,11 @@
             justify-content: center;
             gap: 2px;
             text-align: center;
+            font-size: 10px;
+        }
+
+        .link:hover {
+            background-color: transparent;
         }
         
     }

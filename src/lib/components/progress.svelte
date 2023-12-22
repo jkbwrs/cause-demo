@@ -15,12 +15,14 @@
 
     .progress {
         width: 400px;
-        max-width: 90%;
+        max-width: 80%;
         height: 6px;
         overflow: hidden;
         border: 1px solid var(--accent);
         border-radius: 12px;
         margin: 0 auto;
+        position: fixed;
+        inset: auto 0 80px 0;
     }
 
     .progress-bar {
