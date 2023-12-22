@@ -76,6 +76,7 @@
         border: 1px solid var(--accent);
         border-radius: 12px;
         width: 500px;
+        max-width: 90vw;
         margin: 0 auto;
         overflow: hidden;
         margin-bottom: 12px;
