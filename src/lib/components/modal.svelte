@@ -28,7 +28,7 @@
         height: 100%;
         width: 100%;
         position: fixed;
-        z-index: 110;
+        z-index: 210;
         inset: 0;
         display: flex;
         justify-content: center;

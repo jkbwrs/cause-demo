@@ -171,7 +171,7 @@
         .profil-dd {
             background-color: var(--white);
             inset: auto 0 0 0;
-            z-index: 1000;
+            z-index: 110;
             display: flex;
             flex-direction: row;
             border: none;

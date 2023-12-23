@@ -855,6 +855,7 @@
                     icon="smoke"
                     delay={300}
                     on:click={() => (step += 1)}
+                    style="width: 100%"
                 />
                 <Item
                     title="Nein"
@@ -862,6 +863,7 @@
                     icon="smoke"
                     delay={400}
                     on:click={() => (step += 2)}
+                    style="width: 100%"
                 />
             </div>
         </Step>

@@ -6,6 +6,7 @@
     export let delay: number = 0
     export let current: string = ""
     export let value: string = ""
+    export let style: string = ""
 
     let selected: boolean = false
 
@@ -15,7 +16,7 @@
     }
 </script>
 
-<div class="item {selected ? "current" : ""}" on:click on:keypress in:fly|global={{y: 20, duration: 400, delay: delay}} tabindex="0" role="button">
+<div class="item {selected ? "current" : ""}" on:click on:keypress in:fly|global={{y: 20, duration: 400, delay: delay}} style="{style}" tabindex="0" role="button">
     <img class="icon" src="../{icon}.svg" alt={title} width="45" height="45">
     <p class="title">{title}</p>
 </div>
