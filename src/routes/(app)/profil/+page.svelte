@@ -111,7 +111,7 @@
                 <input type="password" required={true} bind:value={newPassword} placeholder="Neues Passwort" style="margin-bottom: 12px">
                 <input type="password" required={true} bind:value={newPasswordConfirmed} placeholder="Passwort bestätigen" style="margin-bottom: 12px">
                 {#if newPassword != "" && newPassword === newPasswordConfirmed}
-                    <button type="submit">Email ändern</button>
+                    <button type="submit">Passwort ändern</button>
                 {/if}
             </form>
         </Modal>
@@ -149,7 +149,7 @@
                 <p class="description">Um deinen Namen zu aktualisieren die Felder ausfüllen und bestätigen.</p>
                 <input type="text" required={true} bind:value={newFirstname} name="firstname" placeholder="Vorname" style="margin-bottom: 12px">
                 <input type="text" required={true} bind:value={newLastname} name="lastname" placeholder="Nachname" style="margin-bottom: 12px">
-                <button type="submit" on:click={() => openNameModal = false}>Email ändern</button>
+                <button type="submit" on:click={() => openNameModal = false}>Name ändern</button>
             </form>
         </Modal>
     {/if}

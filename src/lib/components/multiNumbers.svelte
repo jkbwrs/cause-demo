@@ -9,7 +9,9 @@
     export let current: number = 0
     export let start: number = 18
 
-    $: { times = current + start }
+    $: if (current >= 0 && current < length) {
+        times = current + start;
+    }
 
 </script>
 

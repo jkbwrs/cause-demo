@@ -13,6 +13,9 @@
     import { fly } from "svelte/transition";
     import { goto } from "$app/navigation";
     import {user} from "$lib/states"
+    import { enhance } from "$app/forms";
+    import TreeChart from "$lib/components/treeChart.svelte";
+    import RadialChart from "$lib/components/radialChart.svelte";
 
     export let data: PageData;
 
@@ -26,17 +29,17 @@
     let password: string = "";
     let passwordConfirm: string = "";
 
-    function updateCardio(value: number) {
+    function updateCardio(value: number): void {
         data.mix.lifestyleProfile.hoursOfCardioPerWeek = value;
         data.mix.lifestyleProfile.hoursOfStrengthTrainingPerWeek = 100 - value;
     }
 
-    function updateStrengthTraining(value: number) {
+    function updateStrengthTraining(value: number): void {
         data.mix.lifestyleProfile.hoursOfStrengthTrainingPerWeek = value;
         data.mix.lifestyleProfile.hoursOfCardioPerWeek = 100 - value;
     }
 
-    function signupStep() {
+    function signupStep(): void {
         // Signup Funktion
         step += 1;
     }
@@ -59,12 +62,44 @@
         }
 
         if (data.mix.personalProfile.gender === "male") {
-            if (step === 28) step = 31
+            if (step === 28) step = 32
         }
 
         if ($user != null) {
-            if (step === 34) step = 35
+            if (step === 35) step = 36
         }
+    }
+
+    $: {console.log(data.mix)}
+
+
+    interface MineralData {
+        [key: string]: number;
+    }
+
+    interface TransformedMineral {
+        name: string;
+        value: number;
+    }
+
+    let transformedMineralData: { values: number[], labels: string[] };
+    let transformedSonstigeData: { values: number[], labels: string[] };
+
+    const transformMinerals = (minerals: MineralData): TransformedMineral[] => {
+        return Object.entries(minerals).map(([name, value]) => ({ name, value }));
+    };
+
+    const transformForRadialChart = (minerals: TransformedMineral[]): { values: number[], labels: string[] } => {
+        const values = minerals.map(mineral => mineral.value);
+        const labels = minerals.map(mineral => mineral.name);
+        return { values, labels };
+    };
+
+    $: {
+        const mineralArray = transformMinerals(data.info.minerals);
+        transformedMineralData = transformForRadialChart(mineralArray);
+        const sonstigeArray = transformMinerals(data.info.other);
+        transformedSonstigeData = transformForRadialChart(sonstigeArray);
     }
 </script>
 
@@ -182,7 +217,7 @@
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "0-10");
+                                        "Unter 20%");
                             }}
                         />
                         <Item
@@ -190,11 +225,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={400}
-                            value="10-15"
+                            value="21% - 26%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "10-15");
+                                        "21% - 26%");
                             }}
                         />
                         <Item
@@ -202,11 +237,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={500}
-                            value="15-20"
+                            value="27% - 32%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "15-20");
+                                        "27% - 32%");
                             }}
                         />
                         <Item
@@ -214,11 +249,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={600}
-                            value="20-30"
+                            value="33% - 40%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "20-30");
+                                        "33% - 40%");
                             }}
                         />
                         <Item
@@ -226,11 +261,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={600}
-                            value="30-40"
+                            value="Über 40%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "30-40");
+                                        "Über 40%");
                             }}
                         />
                     </div>
@@ -241,11 +276,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={300}
-                            value="0-10"
+                            value="Unter 12%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "0-10");
+                                        "Unter 12%");
                             }}
                         />
                         <Item
@@ -253,11 +288,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={400}
-                            value="10-15"
+                            value="13% - 18%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "10-15");
+                                        "13% - 18%");
                             }}
                         />
                         <Item
@@ -265,11 +300,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={500}
-                            value="15-20"
+                            value="19% - 25%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "15-20");
+                                        "19% - 25%");
                             }}
                         />
                         <Item
@@ -277,11 +312,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={600}
-                            value="20-30"
+                            value="26% - 30%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "20-30");
+                                        "26% - 30%");
                             }}
                         />
                         <Item
@@ -289,11 +324,11 @@
                             current={data.mix.personalProfile.bodyFatPercentage}
                             icon="profil"
                             delay={600}
-                            value="30-40"
+                            value="Über 30%"
                             on:click={() => {
                                 (step += 1),
                                     (data.mix.personalProfile.bodyFatPercentage =
-                                        "30-40");
+                                        "Über 30%");
                             }}
                         />
                     </div>
@@ -454,7 +489,7 @@
                     delay={600}
                     on:click={() => {
                         (step += 1),
-                            (data.mix.dietaryProfile.dietType = "canivor");
+                        (data.mix.dietaryProfile.dietType = "canivor");
                     }}
                 />
                 <Item
@@ -502,6 +537,7 @@
             <MultiNumbers
                 length={8}
                 start={0}
+                current={data.mix.dietaryProfile.meatPerWeek}
                 bind:times={data.mix.dietaryProfile.meatPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -517,6 +553,7 @@
             <MultiNumbers
                 length={8}
                 start={0}
+                current={data.mix.dietaryProfile.fishPerWeek}
                 bind:times={data.mix.dietaryProfile.fishPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -532,6 +569,7 @@
             <MultiNumbers
                 length={15}
                 start={0}
+                current={data.mix.dietaryProfile.eggsPerWeek}
                 bind:times={data.mix.dietaryProfile.eggsPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -547,6 +585,7 @@
             <MultiNumbers
                 length={8}
                 start={0}
+                current={data.mix.dietaryProfile.milkPerWeek}
                 bind:times={data.mix.dietaryProfile.milkPerWeek}
                 next={() => (step += 1)}
                 delay={50}
@@ -562,6 +601,7 @@
             <MultiNumbers
                 length={8}
                 start={0}
+                current={data.mix.dietaryProfile.vegetableServingsPerDay}
                 bind:times={data.mix.dietaryProfile.vegetableServingsPerDay}
                 next={() => (step += 1)}
                 delay={50}
@@ -577,8 +617,9 @@
             <MultiNumbers
                 length={8}
                 start={0}
+                current={data.mix.dietaryProfile.fruitServingsPerDay}
                 bind:times={data.mix.dietaryProfile.fruitServingsPerDay}
-                next={() => (step += 1)}
+                next={() => step += 1}
                 delay={50}
             />
         </Step>
@@ -592,24 +633,27 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Nie"
-                    current={data.mix.dietaryProfile.foodQualität}
+                    current={data.mix.dietaryProfile.foodQuality}
+                    value="Nie"
                     icon="star"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {step += 1}}
                 />
                 <Item
                     title="Manchmal"
-                    current={data.mix.dietaryProfile.foodQualität}
+                    current={data.mix.dietaryProfile.foodQuality}
+                    value="Manchmal"
                     icon="half-star"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => {step += 1}}
                 />
                 <Item
                     title="Meistens"
-                    current={data.mix.dietaryProfile.foodQualität}
+                    current={data.mix.dietaryProfile.foodQuality}
+                    value="Meistens"
                     icon="empty-star"
                     delay={500}
-                    on:click={() => (step += 1)}
+                    on:click={() => {step += 1}}
                 />
             </div>
         </Step>
@@ -621,10 +665,11 @@
             current={9}
         >
             <MultiNumbers
-                length={20}
-                start={1}
+                length={41}
+                start={0}
+                current={data.mix.dietaryProfile.cupsOfWaterPerDay}
                 bind:times={data.mix.dietaryProfile.cupsOfWaterPerDay}
-                next={() => (step += 1)}
+                next={() => step += 1}
                 delay={20}
             />
         </Step>
@@ -638,7 +683,8 @@
             <MultiNumbers
                 length={8}
                 start={0}
-                bind:times={data.mix.personalProfile.age}
+                bind:times={data.mix.dietaryProfile.cupsOfCoffeePerDay}
+                current={data.mix.dietaryProfile.cupsOfCoffeePerDay}
                 next={() => (step += 1)}
                 delay={50}
             />
@@ -653,21 +699,27 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Cause SWEET"
+                    current={data.mix.dietaryProfile.nutrion}
+                    value="Cause SWEET"
                     icon="sweet"
                     delay={300}
-                    on:click={() => data.mix.dietaryProfile.nutrion = "sweet"}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "Cause SWEET"}
                 />
                 <Item
                     title="Cause SLEEP"
+                    current={data.mix.dietaryProfile.nutrion}
+                    value="Cause SLEEP"
                     icon="sleep-cause"
                     delay={400}
-                    on:click={() => data.mix.dietaryProfile.nutrion = "sleep"}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "Cause SLEEP"}
                 />
                 <Item
                     title="Beide"
+                    current={data.mix.dietaryProfile.nutrion}
+                    value="Beide"
                     icon="both"
                     delay={500}
-                    on:click={() => data.mix.dietaryProfile.nutrion = "both"}
+                    on:click={() => data.mix.dietaryProfile.nutrion = "Beide"}
                 />
             </div>
             <div class="input-item" in:fly|global={{ y: 20, delay: 600 }}>
@@ -675,6 +727,7 @@
                 <input
                     type="text"
                     name=""
+                    bind:value={data.mix.dietaryProfile.extraNutrion}
                     placeholder="Produkt eintragen"
                     style="text-align: center"
                 />
@@ -722,37 +775,42 @@
                 <Item
                     title="Weniger als 5 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
+                    value="Weniger als 5 Stunden"
                     icon="sleep"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepPerDay = "Weniger als 5 Stunden", step += 1}}
                 />
                 <Item
                     title="5 - 6 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
+                    value="5 - 6 Stunden"
                     icon="sleep"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepPerDay = "5 - 6 Stunden", step += 1}}
                 />
                 <Item
                     title="7 - 8 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
+                    value="7 - 8 Stunden"
                     icon="sleep"
                     delay={500}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepPerDay = "7 - 8 Stunden", step += 1}}
                 />
                 <Item
                     title="9 - 10 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
+                    value="9 - 10 Stunden"
                     icon="sleep"
                     delay={600}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepPerDay = "9 - 10 Stunden", step += 1}}
                 />
                 <Item
                     title="Mehr als 10 Stunden"
                     current={data.mix.lifestyleProfile.sleepPerDay}
+                    value="Mehr als 10 Stunden"
                     icon="sleep"
                     delay={700}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepPerDay = "Mehr als 10 Stunden", step += 1}}
                 />
             </div>
         </Step>
@@ -766,38 +824,43 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Sehr gut"
+                    value="Sehr gut"
                     current={data.mix.lifestyleProfile.sleepQuality}
                     icon="sleep-quality"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepQuality = "Sehr gut", step += 1}}
                 />
                 <Item
                     title="Gut"
+                    value="Gut"
                     current={data.mix.lifestyleProfile.sleepQuality}
                     icon="sleep-quality"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepQuality = "Gut", step += 1}}
                 />
                 <Item
                     title="Zufriedenstellend"
+                    value="Zufriedenstellend"
                     current={data.mix.lifestyleProfile.sleepQuality}
                     icon="sleep-quality"
                     delay={500}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepQuality = "Zufriedenstellend", step += 1}}
                 />
                 <Item
                     title="Verbesserungswürdig"
+                    value="Verbesserungswürdig"
                     current={data.mix.lifestyleProfile.sleepQuality}
                     icon="sleep-quality"
                     delay={600}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepQuality = "Verbesserungswürdig", step += 1}}
                 />
                 <Item
                     title="Schlecht"
+                    value="Schlecht"
                     icon="sleep-quality"
                     current={data.mix.lifestyleProfile.sleepQuality}
                     delay={700}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.sleepQuality = "Schlecht", step += 1}}
                 />
             </div>
         </Step>
@@ -811,38 +874,43 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Viel Stress"
+                    value="Viel Stress"
                     current={data.mix.lifestyleProfile.stressLevel}
                     icon="stress"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.stressLevel = "Viel Stress", step += 1}}
                 />
                 <Item
                     title="Mittlerer Stress"
+                    value="Mittlerer Stress"
                     current={data.mix.lifestyleProfile.stressLevel}
                     icon="stress"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.stressLevel = "Mittlerer Stress", step += 1}}
                 />
                 <Item
                     title="Normaler Stress"
+                    value="Normaler Stress"
                     current={data.mix.lifestyleProfile.stressLevel}
                     icon="stress"
                     delay={500}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.stressLevel = "Normaler Stress", step += 1}}
                 />
                 <Item
                     title="Wenig Stress"
+                    value="Wenig Stress"
                     current={data.mix.lifestyleProfile.stressLevel}
                     icon="stress"
                     delay={600}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.stressLevel = "Wenig Stress", step += 1}}
                 />
                 <Item
                     title="Kein Stress"
+                    value="Kein Stress"
                     current={data.mix.lifestyleProfile.stressLevel}
                     icon="stress"
                     delay={700}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.stressLevel = "Kein Stress", step += 1}}
                 />
             </div>
         </Step>
@@ -851,18 +919,20 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Ja"
+                    value="Ja"
                     current={data.mix.lifestyleProfile.cigarettes}
                     icon="smoke"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifestyleProfile.cigarettes = "Ja", step += 1}}
                     style="width: 100%"
                 />
                 <Item
                     title="Nein"
+                    value="Nein"
                     current={data.mix.lifestyleProfile.cigarettes}
                     icon="smoke"
                     delay={400}
-                    on:click={() => (step += 2)}
+                    on:click={() => {data.mix.lifestyleProfile.cigarettes = "Nein", step += 2}}
                     style="width: 100%"
                 />
             </div>
@@ -877,6 +947,7 @@
             <MultiNumbers
                 length={36}
                 start={1}
+                current={data.mix.lifestyleProfile.cigarettesPerDay}
                 bind:times={data.mix.lifestyleProfile.cigarettesPerDay}
                 next={() => (step += 1)}
                 delay={20}
@@ -912,10 +983,8 @@
         >
             <p
                 class="sport-title"
-                in:fly|global={{ y: 20, duration: 400, delay: 300 }}
-            >
-                Ausdauer Training: {data.mix.lifestyleProfile
-                    .hoursOfCardioPerWeek}%
+                in:fly|global={{ y: 20, duration: 400, delay: 300 }}>
+                    Ausdauer Training: {data.mix.lifestyleProfile.hoursOfCardioPerWeek}%
             </p>
             <Range
                 bind:value={data.mix.lifestyleProfile.hoursOfCardioPerWeek}
@@ -933,12 +1002,10 @@
                 class="sport-title"
                 in:fly|global={{ y: 20, duration: 400, delay: 500 }}
             >
-                Kraft Training: {data.mix.lifestyleProfile
-                    .hoursOfStrengthTrainingPerWeek}%
+                Kraft Training: {data.mix.lifestyleProfile.hoursOfStrengthTrainingPerWeek}%
             </p>
             <Range
-                bind:value={data.mix.lifestyleProfile
-                    .hoursOfStrengthTrainingPerWeek}
+                bind:value={data.mix.lifestyleProfile.hoursOfStrengthTrainingPerWeek}
                 min={0}
                 max={100}
                 on:input={() =>
@@ -996,21 +1063,27 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Ja"
+                    value="Ja"
+                    current={data.mix.lifePhaseProfile.pregnant}
                     icon="pregnant"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifePhaseProfile.pregnant = "Ja", step += 1}}
                 />
                 <Item
                     title="In naher Zukunft"
+                    value="In naher Zukunft"
+                    current={data.mix.lifePhaseProfile.pregnant}
                     icon="pregnant"
                     delay={400}
-                    on:click={() => (step += 2)}
+                    on:click={() => {data.mix.lifePhaseProfile.pregnant = "In naher Zukunft", step += 2}}
                 />
                 <Item
                     title="Nein"
+                    value="Nein"
+                    current={data.mix.lifePhaseProfile.pregnant}
                     icon="pregnant"
                     delay={500}
-                    on:click={() => (step += 2)}
+                    on:click={() => {data.mix.lifePhaseProfile.pregnant = "Nein", step += 2}}
                 />
             </div>
         </Step>
@@ -1024,15 +1097,19 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Ja"
+                    value="Ja"
+                    current={data.mix.lifePhaseProfile.breastfeeding}
                     icon="yes"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifePhaseProfile.breastfeeding = "Ja", step += 1}}
                 />
                 <Item
                     title="Nein"
+                    value="Nein"
+                    current={data.mix.lifePhaseProfile.breastfeeding}
                     icon="no"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    on:click={() => {data.mix.lifePhaseProfile.breastfeeding = "Nein", step += 1}}
                 />
             </div>
         </Step>
@@ -1046,31 +1123,68 @@
             <div class="three-item-wrapper">
                 <Item
                     title="Ja"
+                    value="Ja"
                     icon="yes"
                     delay={300}
-                    on:click={() => (step += 1)}
+                    current={data.mix.lifePhaseProfile.contraception}
+                    on:click={() => {data.mix.lifePhaseProfile.contraception="Ja", step += 1}}
                 />
                 <Item
                     title="Nein"
+                    value="Nein"
                     icon="no"
                     delay={400}
-                    on:click={() => (step += 1)}
+                    current={data.mix.lifePhaseProfile.contraception}
+                    on:click={() => {data.mix.lifePhaseProfile.contraception="Nein", step += 1}}
                 />
             </div>
         </Step>
     {:else if step === 31}
         <Step
+            title="Verhütung"
+            description="Nimmst du hormonelle Verhütungsmittel?"
+            step={7}
+            current={1}
+        >
+            <div class="three-item-wrapper">
+                <Item
+                    title="Ja"
+                    value="Ja"
+                    icon="yes"
+                    delay={300}
+                    current={data.mix.lifePhaseProfile.contraception}
+                    on:click={() => {data.mix.lifePhaseProfile.contraception="Ja", step += 1}}
+                />
+                <Item
+                    title="Nein"
+                    value="Nein"
+                    icon="no"
+                    delay={400}
+                    current={data.mix.lifePhaseProfile.contraception}
+                    on:click={() => {data.mix.lifePhaseProfile.contraception="Nein", step += 1}}
+                />
+            </div>
+        </Step>
+    {:else if step === 32}
+        <Step
             title="Deine Ergebnisse"
             description="Hier siehst du wo du einen Mangel an Nährstoffen hast, auf Basis deiner Angaben"
             step={7}
             current={2}>
+
+                <TreeChart delay={400} />
+                <div class="charts">
+                    <RadialChart data={transformedMineralData} title="Mineralien & Spurenelemente" delay={500} />
+                    <RadialChart  data={transformedSonstigeData} title="Sonstiges" delay={700} />
+                </div>  
+
                 <Button
                     text="Weiter"
                     on:click={() => step += 1}
                     delay={300}
                 />
         </Step>
-    {:else if step === 32}
+    {:else if step === 33}
         <Step
             title="Bluttest"
             description="Wenn du einen Bluttest hochladen möchtest, lade diesen hier hoch. Unsere Experten analysieren deinen Test und passen deinenen Mix bei Bedarf an."
@@ -1080,7 +1194,7 @@
             <Upload delay={300} />
             <Button text="Weiter" on:click={() => (step += 1)} delay={400} />
         </Step>
-    {:else if step === 33}
+    {:else if step === 34}
         <Step
             title="Produkt kaufen"
             description="Wähle eine der folgenden Abos aus um deinen Nutrition Mix zu bestellen."
@@ -1093,14 +1207,14 @@
                     delay={300}
                 />
         </Step>
-    {:else if step === 34}
+    {:else if step === 35}
         <Step
             title="Account erstellen"
             description="Erstelle einen Account um das Produkt zu kaufen. Nur mit einem Account kannst du dein Abo verwalten"
             step={7}
             current={5}
         >
-            <form class="form" action="?/signup">
+            <form class="form" action="?/signup" use:enhance>
                 <input
                     in:fly|global={{ y: 20, duration: 400, delay: 200 }}
                     bind:value={firstname}
@@ -1158,7 +1272,7 @@
                 >
             </form>
         </Step>
-    {:else if step === 35}
+    {:else if step === 36}
         <Step
             title="Bezahl Methode"
             description="Wähle eine Zahlmethode"
@@ -1206,7 +1320,7 @@
                 style="width: 360px"
             />
         </Step>
-    {:else if step === 36}
+    {:else if step === 37}
         <Step
             title="Du bist fertig"
             description="Vielen Dank für deine Bestellung! Du bekommst deine Bestellbestätigung per Mail zugesendet, deine Rechnung kannst du im Profil sehen. Wir benachrichten dich sobald dein Mix bereit ist und an dich versendet wird!"
@@ -1359,5 +1473,11 @@
 
     input {
         text-align: center;
+    }
+
+    .charts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 </style>

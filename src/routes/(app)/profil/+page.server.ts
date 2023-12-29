@@ -1,10 +1,10 @@
 
 
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 
 
-export const load: PageLoad = () => {
+export const load: PageServerLoad = () => {
 
     // Api Call Data on Page Load
     console.log("Page Load runs")

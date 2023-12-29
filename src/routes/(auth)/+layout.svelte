@@ -11,38 +11,52 @@
     ];
 
     let currentImage: string;
-    let animationKey = 0;
-    let showImage = true;
+    let nextImage: string;
+    let currentKey = 0;
+    let nextKey = 1;
+    let showCurrentImage = true;
+    let showNextImage = false;
 
     onMount(() => {
         currentImage = images[Math.floor(Math.random() * images.length)];
+        nextImage = getNextImage();
         startSlideshow();
     });
 
+    function getNextImage() {
+        let currentIndex = images.indexOf(currentImage);
+        return images[(currentIndex + 1) % images.length];
+    }
+
     function startSlideshow() {
         setInterval(() => {
-            let currentIndex = images.indexOf(currentImage);
-            currentImage = images[(currentIndex + 1) % images.length];
-            showImage = false;
+            currentImage = nextImage;
+            nextImage = getNextImage();
+            showCurrentImage = false;
             setTimeout(() => {
-                animationKey++;
-                showImage = true;
+                currentKey++;
+                showCurrentImage = true;
+                showNextImage = false;
             }, 100);
+            showNextImage = true;
+            nextKey++;
         }, 9000);
     }
 </script>
 
 <div class="auth">
     <div class="slider">
-        {#if showImage}
-            <img src={currentImage} alt="Slideshow Image" key={animationKey}>
+        {#if showCurrentImage}
+            <img src={currentImage} alt="Slideshow Image" key={currentKey} class="current">
+        {/if}
+        {#if showNextImage}
+            <img src={nextImage} alt="Slideshow Image" key={nextKey} class="next">
         {/if}
     </div>
     <div class="content">
         <slot></slot>
     </div>
 </div>
-
 
 <style>
 
@@ -79,6 +93,14 @@
         animation: kenBurns 9s ease-in-out 1, fade 9s ease-in-out infinite;
     }
 
+    .slider img.current {
+        z-index: 2;
+    }
+
+    .slider img.next {
+        z-index: 1;
+    }
+
     :global(.auth input) {
         text-align: center;
     }
@@ -100,7 +122,8 @@
         }
 
         .slider {
-            height: 50vh;
+            min-height: 35vh;
+            max-height: 35vh;
             width: 100%;
         }
 

@@ -1,10 +1,10 @@
 
 
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 
 
-export const load: PageLoad = () => {
+export const load: PageServerLoad = () => {
 
     // Api Call Data
     console.log("Page Load runs")
@@ -29,11 +29,12 @@ export const load: PageLoad = () => {
                 dairyPerWeek: 0,
                 vegetableServingsPerDay: 0,
                 fruitServingsPerDay: 0,
-                cupsOfCoffeePerDay: 0,
-                cupsOfWaterPerDay: 0,
+                cupsOfCoffeePerDay: 1,
+                cupsOfWaterPerDay: 1,
                 milkPerWeek: 0,
-                foodQualität: "low",
-                nutrion: ""
+                foodQuality: "low",
+                nutrion: "",
+                extraNutrion: ""
             },
             lifestyleProfile: {
                 hoursOfSleepPerNight: 0,
@@ -47,18 +48,43 @@ export const load: PageLoad = () => {
                 stressLevel: "",
             },
             lifePhaseProfile: {
-                pregnant: false,
-                breastfeeding: false,
-                contraception: false,
-                menopause: false,
+                pregnant: "",
+                breastfeeding: "",
+                contraception: "",
+                menopause: "",
             },
+        },
+
+        info: {
+            vitamines: {
+
+            },
+            minerals: {
+                Kalzium: 50,
+                Magnesium: 60,
+                Kupfer: 40,
+                Eisen: 70,
+                Mangan: 30,
+                Selen: 50,
+                Zink: 80
+            },
+            other: {
+                CoQ10: 60,
+                Hyaluronsäure: 70,
+                Omega3: 80,
+                Lutein: 50,
+                ALA: 40,
+                Kollagen: 60,
+                MSM: 30,
+                Phytosterol: 70
+            }
         }
 	}
 };
 
 
 
-export const actions = {
+export const actions: Actions = {
 
 	signup: async ({request}) => {
         const data = await request.formData();
@@ -72,8 +98,8 @@ export const actions = {
         console.log("Signup runs")
 
         return {
+
         }
 	},
 
-
-} satisfies Actions;
+}
